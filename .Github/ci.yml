@@ -1,0 +1,25 @@
+name: CI
+
+# Enable Buildkit and let compose use it to speed up image building
+env:
+  DOCKER_BUILDKIT: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+
+on:
+  push:
+    branches: [ "counter" ]
+    paths-ignore: [ "docs/**" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: SSH Remote Commands
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: 20.127.11.147
+        username: shampad
+        password: 4423445946644Ss@
+        port: 22
+        script: whoami
+
